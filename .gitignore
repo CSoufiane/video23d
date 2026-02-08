@@ -1,0 +1,7 @@
+*.odt
+data/**
+output/**
+frames/**
+venv/**
+**/__pycache__/**
+
