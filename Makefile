@@ -19,6 +19,7 @@ run:
 
 # Clean temporary files
 clean:
+	rm -f camera_calib.yaml
 	rm -rf frames/*
 	rm -rf output/*
 	find . -type d -name "__pycache__" -exec rm -rf {} +
