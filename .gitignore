@@ -4,4 +4,6 @@ output/**
 frames/**
 venv/**
 **/__pycache__/**
+camera_calib.yaml
 
+!data/ressources.txt

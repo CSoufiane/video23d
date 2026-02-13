@@ -22,3 +22,4 @@ clean:
 	rm -rf frames/*
 	rm -rf output/*
 	find . -type d -name "__pycache__" -exec rm -rf {} +
+

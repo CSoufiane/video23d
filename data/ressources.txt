@@ -1,0 +1,6 @@
+[chessboard]
+    - https://docs.opencv.org/4.x/da/d0d/tutorial_camera_calibration_pattern.html
+    - 9*6: https://github.com/opencv/opencv/blob/4.x/doc/pattern.png
+
+[arucogen]
+    - https://chev.me/arucogen/
