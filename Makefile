@@ -24,3 +24,5 @@ clean:
 	rm -rf output/*
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 
+tree:
+	tree -I '.git/|output/|.pytest_cache|venv/|__pycache__|data/|frames/'
