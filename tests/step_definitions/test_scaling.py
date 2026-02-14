@@ -24,3 +24,9 @@ def execute_scaling(root_dir):
 def verify_scale(scale):
     assert scale > 0
     print(f"Computed Scale: {scale}")
+
+@then('the final point cloud is saved in meters')
+def verify_scaled_output(root_dir):
+    # Verify the final PLY exists after scaling
+    final_model = root_dir / "output/scaled_model.ply"
+    assert final_model.exists(), "The final scaled 3D model was not generated."

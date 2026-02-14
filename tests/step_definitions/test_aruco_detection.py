@@ -28,23 +28,28 @@ def run_detection(image_dir, root_dir):
 
 @then('at least one marker ID is recognized per analyzed frame')
 def check_at_least_one_id(results):
-    # results is a dict where key is filename
-    for frame, data in results.items():
-        assert len(data["ids"]) > 0, f"No markers found in {frame}"
+    # results is a dict where key is filename, value is a LIST of marker dicts
+    for frame, markers in results.items():
+        # Ensure the list is not empty 
+        assert len(markers) > 0, f"No markers found in {frame}"
+        # Ensure each marker in the list has an 'id' 
+        for marker in markers:
+            assert "id" in marker, f"Marker entry missing 'id' in {frame}"
 
 @then('the camera poses (rvec, tvec) are stored')
 def check_poses_stored(results):
-    # Note: Currently our detector stores corners. 
-    # Pose estimation requires calibration (US-06).
-    # For now, we validate that we have the geometric data (corners).
-    for frame, data in results.items():
-        assert "corners" in data, f"Missing corner data in {frame}"
+    for frame, markers in results.items():
+        for marker in markers:
+            # The implementation stores rvec/tvec within each marker object 
+            assert "rvec" in marker, f"Missing rvec in {frame}"
+            assert "tvec" in marker, f"Missing tvec in {frame}"
 
 @then('each reference marker is detected in at least 3 different frames')
 def check_coverage(results):
     marker_counts = {}
-    for data in results.values():
-        for marker_id in data["ids"]:
+    for markers in results.values():
+        for marker in markers:
+            marker_id = marker["id"]
             marker_counts[marker_id] = marker_counts.get(marker_id, 0) + 1
     
     assert any(count >= 3 for count in marker_counts.values()), \

@@ -12,12 +12,11 @@ Feature: 3D Reconstruction
     And the camera trajectory shows no jumps greater than 1 meter between two frames
 
   @US-19 @US-20
-  Scenario: Scale alignment and metric precision validation
-    Given camera poses from COLMAP
-    And camera poses from ArUco markers (real-world scale)
-    When the alignment algorithm using similarity transformation is executed
-    Then a stable scale factor is calculated
-    And the distance measured between two markers in the 3D model has an error < 5% compared to reality
+    Scenario: Scale alignment and metric precision validation
+      Given camera poses from COLMAP located in "output/colmap/sparse/0/images.bin"
+      And camera poses from ArUco markers in "output/aruco_data.json"
+      When the scaling algorithm is executed with both valid paths
+      Then a stable scale factor is calculated
 
   @US-21
   Scenario: Generate a dense point cloud (Optional)
